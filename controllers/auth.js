@@ -22,8 +22,8 @@ exports.register = asyncHandler(async(req,res,next) => {
         phone,
         role    
     })
-
-   res.status(200).json({ success:true, message: 'User registered successfully'})
+    
+    sendTokenResponse(user, 200, res)
 })
 
 // @desc      Login
@@ -51,6 +51,27 @@ exports.login = asyncHandler(async(req, res, next) => {
         return next(new ErrorResponse('Invalid Credentials',400))
     }
 
-    res.status(200).json({ success : true, message: 'User logged in'})
-
+    sendTokenResponse(user, 200, res)
 })
+
+
+// Token Response
+const sendTokenResponse = (user , statusCode, res) => {
+    // Create token
+    const token = user.getSignedJwtToken();
+
+    const options = {
+        expires : new Date(
+            Date.now() + process.env.JWT_COOKIE_EXPIRE * 1000 * 24 * 60 * 60
+        ),
+        httpOnly: true
+    }
+
+    res
+    .status(statusCode)
+    .cookie('token', token, options)
+    .json({
+        success : true,
+        token 
+    })
+}
