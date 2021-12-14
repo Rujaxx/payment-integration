@@ -12,7 +12,7 @@ const ProductSchema = new mongoose.Schema({
         type : String,
         required : [true,"Please add an description"],
         trim : true,
-        minlength : 20
+        minlength : 10
     },
     price : {
         type : Number,
