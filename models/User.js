@@ -24,7 +24,7 @@ const UserSchema = new mongoose.Schema({
         match: [/\d{10}/,'Please add a valid number' ]
       },  
     role : {
-        type : String,
+        type : String,  
         enum : ['admin','user'],
         default : 'user'
     },
