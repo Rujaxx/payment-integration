@@ -11,6 +11,7 @@ connectDB()
 
 // Route files
 const auth = require('./routes/auth')
+const user = require('./routes/users')
 const product = require('./routes/products')
 
 const app = express();
@@ -20,6 +21,7 @@ app.use(express.json())
 
 // Mount route files
 app.use('/api/v1/auth', auth)
+app.use('/api/v1/users', user)
 app.use('/api/v1/products', product)
 
 // ErrorHandler

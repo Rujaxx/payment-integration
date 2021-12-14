@@ -33,7 +33,7 @@ exports.getProduct = asyncHandler(async( req, res, next) => {
 // @desc      Create a product
 // @route     POST /api/v1/products
 // @access    Admin
-exports.addProduct = asyncHandler(async( req, res, next) => {
+exports.createProduct = asyncHandler(async( req, res, next) => {
     const product = await Product.create(req.body)
 
     res.status(200).json({
