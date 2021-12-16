@@ -12,6 +12,12 @@ exports.getProducts = asyncHandler(async( req, res, next) => {
         success : true,
         data : products
     })
+
+    res.render('home',{
+        success : true,
+        data: products
+    })
+
 })
 
 // @desc      get a product

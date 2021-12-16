@@ -16,8 +16,12 @@ const product = require('./routes/products')
 
 const app = express();
 
-// Body parser
+// Set EJS as templating engine
+app.set('view engine', 'ejs');
+
 app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+
 
 // Mount route files
 app.use('/api/v1/auth', auth)
