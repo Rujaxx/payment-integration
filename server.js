@@ -13,6 +13,8 @@ connectDB()
 const auth = require('./routes/auth')
 const user = require('./routes/users')
 const product = require('./routes/products')
+const order = require('./routes/orders')
+const cart = require('./routes/cart')
 
 const app = express();
 
@@ -27,6 +29,8 @@ app.use(express.urlencoded({ extended: false }))
 app.use('/api/v1/auth', auth)
 app.use('/api/v1/users', user)
 app.use('/api/v1/products', product)
+app.use('/api/v1/orders', order)
+app.use('/api/v1/cart', cart)
 
 // ErrorHandler
 app.use(errorHandler)

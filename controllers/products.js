@@ -8,14 +8,9 @@ const ErrorResponse = require('../utils/errorResponse')
 exports.getProducts = asyncHandler(async( req, res, next) => {
     const products = await Product.find()
 
-    res.status(200).json({ 
+    res.status(200).render('home',{ 
         success : true,
         data : products
-    })
-
-    res.render('home',{
-        success : true,
-        data: products
     })
 
 })
@@ -58,7 +53,7 @@ exports.updateProduct = asyncHandler(async( req, res, next) => {
         return next(new ErrorResponse('Item not found',404))
     }
 
-    product = await Product.findByIdAndUpdate(req.params.id,req.body, {
+    product = await Product.findByIdAndUpdate(req.params.id,{ $set : req.body}, {
         runValidators: true,
         new : true
     })

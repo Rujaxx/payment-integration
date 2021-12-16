@@ -21,7 +21,7 @@ exports.getUser = asyncHandler(async( req, res, next) => {
     const user = await User.findById(req.params.id)
 
     if(!user){
-        return next(new ErrorResponse('Item not found',404))
+        return next(new ErrorResponse('User not found',404))
     }
 
     res.status(200).json({ 
@@ -30,17 +30,6 @@ exports.getUser = asyncHandler(async( req, res, next) => {
     })
 })
 
-// @desc      Create a user
-// @route     POST /api/v1/users
-// @access    Admin
-exports.createUser = asyncHandler(async( req, res, next) => {
-    const user = await User.create(req.body)
-
-    res.status(200).json({
-        success : true,
-        data : user
-    })
-})
 
 // @desc      update a user
 // @route     PUT /api/v1/users/:id
@@ -49,10 +38,10 @@ exports.updateUser = asyncHandler(async( req, res, next) => {
     let user = await user.findById(req.params.id)
 
     if(!user){
-        return next(new ErrorResponse('Item not found',404))
+        return next(new ErrorResponse('User not found',404))
     }
 
-    user = await User.findByIdAndUpdate(req.params.id,req.body, {
+    user = await User.findByIdAndUpdate(req.params.id,{ $set : req.body}, {
         runValidators: true,
         new : true
     })
@@ -70,7 +59,7 @@ exports.deleteUser = asyncHandler(async( req, res, next) => {
     let user = await User.findById(req.params.id)
 
     if(!user){
-        return next(new ErrorResponse('Item not found',404))
+        return next(new ErrorResponse('User not found',404))
     }
 
     user.remove()
