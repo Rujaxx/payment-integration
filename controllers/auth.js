@@ -26,6 +26,15 @@ exports.register = asyncHandler(async(req,res,next) => {
     sendTokenResponse(user, 200, res)
 })
 
+// @desc      Register get
+// @route     Get /api/v1/auth/register
+// @access    Public
+exports.registerGet = asyncHandler(async(req,res,next) => {
+    res.status(200).render('register',{
+        title: "Register"
+    })
+})
+
 // @desc      Login
 // @route     Post /api/v1/auth/login
 // @access    Public
@@ -52,6 +61,15 @@ exports.login = asyncHandler(async(req, res, next) => {
     }
 
     sendTokenResponse(user, 200, res)
+})
+
+// @desc      login get
+// @route     Get /api/v1/auth/login
+// @access    Public
+exports.loginGet = asyncHandler(async(req,res,next) => {
+    res.status(200).render('login',{
+        title: "login"
+    })
 })
 
 

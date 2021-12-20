@@ -8,7 +8,7 @@ const ErrorResponse = require('../utils/errorResponse')
 exports.getCarts = asyncHandler(async( req, res, next) => {
     const carts = await Cart.find()
 
-    res.status(200).render('home',{ 
+    res.status(200).json({ 
         success : true,
         data : carts
     })
