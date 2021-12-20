@@ -1,5 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv')
+const morgan = require('morgan')
 const errorHandler = require('./middlewares/error')
 
 // Load env vars
@@ -24,6 +25,10 @@ app.set('view engine', 'ejs');
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
+// Logger
+if(process.env.NODE_ENV === 'development'){
+    app.use(morgan('dev'))
+}
 
 // Mount route files
 app.use('/api/v1/auth', auth)
