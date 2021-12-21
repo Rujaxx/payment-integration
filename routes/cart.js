@@ -4,13 +4,15 @@ const { createCart, getCarts, getCart, updateCart, deleteCart } = require('../co
 
 const router = express.Router()
 
+const { protect, authorize } = require('../middlewares/auth')
+
 router.route('/')
-.post(createCart)
-.get(getCarts)
+.post(protect,createCart)
+.get(protect,getCarts)
 
 router.route('/:id')
-.get(getCart)
-.put(updateCart)
-.delete(deleteCart)
+.get(protect,getCart)
+.put(protect,updateCart)
+.delete(protect,deleteCart)
 
 module.exports = router

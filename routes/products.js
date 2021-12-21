@@ -4,8 +4,10 @@ const { createProduct,getProducts, getProduct, updateProduct, deleteProduct  } =
 
 const router = express.Router()
 
-router.route('/').post(createProduct).get(getProducts)
+const { protect, authorize } = require('../middlewares/auth')
 
-router.route('/:id').get(getProduct).put(updateProduct).delete(deleteProduct)
+router.route('/').post(protect,authorize('admin'),createProduct).get(getProducts)
+
+router.route('/:id').get(getProduct).put(protect,authorize('admin'),updateProduct).delete(protect,authorize('admin'),deleteProduct)
 
 module.exports = router

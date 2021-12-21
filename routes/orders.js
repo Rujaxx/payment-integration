@@ -4,13 +4,15 @@ const { createOrder, getOrders, getOrder, updateOrder, deleteOrder } = require('
 
 const router = express.Router()
 
+const { protect, authorize } = require('../middlewares/auth')
+
 router.route('/')
-.post(createOrder)
+.post(protect,createOrder)
 .get(getOrders)
 
 router.route('/:id')
-.get(getOrder)
-.put(updateOrder)
-.delete(deleteOrder)
+.get(protect,getOrder)
+.put(protect,updateOrder)
+.delete(protect,deleteOrder)
 
 module.exports = router
