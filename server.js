@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv')
 const morgan = require('morgan')
+const cookieParser = require('cookie-parser')
 const errorHandler = require('./middlewares/error')
 
 // Load env vars
@@ -24,6 +25,9 @@ app.set('view engine', 'ejs');
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+
+// cookie-parser
+app.use(cookieParser());
 
 // Logger
 if(process.env.NODE_ENV === 'development'){

@@ -87,9 +87,6 @@ const sendTokenResponse = (user , statusCode, res) => {
 
     res
     .status(statusCode)
-    // .cookie('token', token, options)
-    .json({
-        success : true,
-        token 
-    })
+    .cookie('token', token, options)
+    .redirect('/api/v1/products')
 }
