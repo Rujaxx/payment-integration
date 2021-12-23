@@ -10,6 +10,7 @@ exports.getProducts = asyncHandler(async( req, res, next) => {
 
     res.status(200).render('home',{ 
         success : true,
+        count: products.length,
         data : products
     })
 
@@ -25,9 +26,12 @@ exports.getProduct = asyncHandler(async( req, res, next) => {
         return next(new ErrorResponse('Item not found',404))
     }
 
-    res.status(200).json({ 
+    console.log(req.user.id)
+
+    res.status(200).render('product/product',{ 
         success : true,
-        data : product
+        data : product,
+        paypalClientId : process.env.PAYPAL_CLIENT_ID
     })
 })
 

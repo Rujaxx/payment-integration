@@ -34,13 +34,31 @@ exports.getCart = asyncHandler(async( req, res, next) => {
 // @desc      Create a cart
 // @route     POST /api/v1/cart
 // @access    Admin
-exports.createCart = asyncHandler(async( req, res, next) => {
-    const cart = await Cart.create(req.body)
+exports.addToCart = asyncHandler(async( req, res, next) => {
+    let cart
 
-    res.status(200).json({
-        success : true,
-        data : cart
-    })
+    const user = req.user.id
+    const productId = req.params.productId
+
+    // req.body.user = req.user.id
+    // req.body.productId = req.params.id
+
+    cart = await Cart.findOne({user})
+
+    console.log(cart)
+    if(cart){
+        if(cart.products[0].productId==productId){
+       cart = await Cart.findOneAndUpdate({'products.productId' : productId},{$inc : { 'products.$.quantity' :1 }},{new : true})
+        }
+    }       
+   else{
+     cart = await Cart.create({
+        user,    
+        products: [{ productId }]
+      })
+   }
+
+    res.status(200).redirect('back')
 })
 
 // @desc      update a cart
